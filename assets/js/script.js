@@ -6,7 +6,7 @@
 // timer reaches and stays at 0 when all questions are answered
 // when game is over, score is presented, offer option to save initials and score (localStorage)
 
-var startButton = document.querySelector("#begin");
+var startButton = document.getElementById("begin");
 var startScreenEl = document.getElementById("start-screen");
 var questionAnswerEl = document.getElementById("display-Q-A");
 var answer1Btn = document.getElementById("a1");
@@ -15,6 +15,7 @@ var answer3Btn = document.getElementById("a3");
 var answer4Btn = document.getElementById("a4");
 var scoreEl = document.getElementById("score");
 var remainingTime = 60;
+var timerEl = document.getElementById("countdown");
 var score = 0;
 var currentQIndex = 0;
 
@@ -35,15 +36,17 @@ var quizList = [
 
 // timer that begins once the start button is clicked and the first questions is proposed
 var timer = function () {
-  
-
-  var countdown = setInterval(function () {
-
+  var countdown = setInterval(function() {
+    
+    if (remainingTime <= 60) {
+      timerEl.textContent = remainingTime + " seconds remaning";
+      remainingTime--
+      console.log(remainingTime);
+    } 
   }, 1000);
 };
 
 function startGame() {
-  console.log("hello");
   // hide elements 
   startScreenEl.setAttribute("class", "hide");
   // scoreEl.setAttribute("class","hide");
@@ -68,10 +71,9 @@ function displayQuestion() {
   
 
 function checkAnswer() {
-
   console.log(this);
   console.log(quizList[currentQIndex].correct)
-  currentQIndex ++; 
+  currentQIndex++; 
   if (currentQIndex <= quizList.length - 1) {
     displayQuestion()
   } else {
