@@ -10,32 +10,39 @@
 </head>
 
 <body>
+  <header>
+    <h3 id="high-scores">View High Scores</h3>
+    <h3 id="countdown">Time: 0</h3>
+  </header>
+
   <div class="container" id="start-screen">
     <h1 class="initialize">Coding Quiz Challenge</h1>
-      <p id="greeting">This is a quiz to test your coding knowledge, particularly as 
-        it pertains to JavaScript. Good Luck!
-      </p>
-      <button id="begin">Begin</button> 
-      
+    <p id="greeting">This is a quiz to test your coding knowledge, particularly as
+      it pertains to JavaScript. For each correct answer, you will earn 10 points.
+      For each incorrect answer, 10 seconds will be deducted from your remaining time.
+      Good Luck!
+    </p>
+    <button id="begin">Begin</button>
   </div>
-  
-  <div id="display-Q-A" class="hide"> 
-    <h3 id="countdown"></h3>
-    <h2 id="questionText">Sample question</h2>
-    <button id="a1">A1</button>
-    <button id="a2">A2</button>
-    <button id="a3">A3</button>
-    <button id="a4">A4</button>
-    <hr/>
+
+  <div id="display-Q-A" class="hide">
+    <h2 id="questionText"></h2>
+    <div id="options">
+      <button id="a1">A1</button>
+      <button id="a2">A2</button>
+      <button id="a3">A3</button>
+      <button id="a4">A4</button>
+    </div>
+    <hr />
     <p id="right-wrong">feedback</p>
 
   </div>
 
   <div id="score" class="hide">
-      <h2 id="results">Player Score</h2>
+    <h2 id="results">Player Score</h2>
 
   </div>
-  
+
   <script src="./assets/js/script.js"></script>
 </body>
 

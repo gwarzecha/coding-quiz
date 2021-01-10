@@ -2,12 +2,79 @@
   box-sizing: border-box;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+#high-scores, #countdown {
+  margin: 15px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(0, 128, 128)
+}
+
+.initialize {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 33px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#greeting {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+#right-wrong {
+  font-size: 33px;
+  font-style: italic;
+  color: rgb(0, 128, 128)
+}
+
 .container {
   margin: auto;
   width: 100%;
   text-align: center;
 }
 
+#display-Q-A {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+#score {
+  margin: 25px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+
 .hide {
   display: none;
 }
+
+
+button {
+  background-color: rgb(0, 128, 128);
+  color: aliceblue;
+  font-size: 24px;
+  margin: 15px;
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 15rem;
+}
+
+
+
+
+
+

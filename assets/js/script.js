@@ -1,11 +1,8 @@
 
-// create a timer that begins once the start button is clicked (addEventListener)
-// present a question with multiple clickable choices
-// present another question if the question is answered correctly and increase score
-// if a question is answered incorrectly, take time from the clock
-// timer reaches and stays at 0 when all questions are answered
+
 // when game is over, score is presented, offer option to save initials and score (localStorage)
 
+// GLOBAL VARIABLES
 var startButton = document.getElementById("begin");
 var startScreenEl = document.getElementById("start-screen");
 var questionAnswerEl = document.getElementById("display-Q-A");
@@ -13,7 +10,7 @@ var answer1Btn = document.getElementById("a1");
 var answer2Btn = document.getElementById("a2");
 var answer3Btn = document.getElementById("a3");
 var answer4Btn = document.getElementById("a4");
-var remainingTime = 30;
+var remainingTime = 60;
 var timerEl = document.getElementById("countdown");
 var scoreEl = document.getElementById("score");
 var score = 0;
@@ -29,33 +26,64 @@ var quizList = [
   },
 
   {
-    question: "Which is the and operator?",
-    answers: ["&&", "!=", "||", "==="],
-    correct: "&&"
+    question: "Which of the following is an example of an EventTarget method?",
+    answers: ["getElementById", "clearInterval", "addEventListener", "textContent"],
+    correct: "addEventListener"
   },
   {
-    question: "Which symbol represents an array?",
-    answers: ["{}", "(())", "[]", "//"],
-    correct: "[]"
+    question: "What is the proper syntax to access an item within an array?",
+    answers: ["array{0}", "array[0]", "array(0)", "array|0|"],
+    correct: "array[0]"
   },
   {
-    question: "Which is the OR operator?",
-    answers: ["&&", "!=", "||", "==="],
-    correct: "||"
+    question: "Which is NOT an acceptable binding?",
+    answers: ["be", "const", "let", "var"],
+    correct: "be"
+  },
+  {
+    question: "Complete the following: git push ____ main",
+    answers: ["commit", "origin", "add", "."],
+    correct: "origin"
+  },
+  {
+    question: "The console method ____ displays a list of all the properties of a specific JS object. ",
+    answers: ["log()", "assert()", "group()", "dir()"],
+    correct: "dir()"
+  },
+  {
+    question: "Which function returns the largest integer less than or equal to a particular number?",
+    answers: ["Math.random()", "Math.sqrt()", "Math.floor()", "Math.round()"],
+    correct: "Math.floor()"
+  },
+  {
+    question: "localStorage uses ____-value pair to store object data.",
+    answers: ["article", "object", "variable", "key"],
+    correct: "key"
+  },
+  {
+    question: "A ____ is a function that is passed as an argument to another function.",
+    answers: ["callback", "retrieval", "recall", "method"],
+    correct: "callback"
+  },
+  {
+    question: "Which is an example of a Boolean value?",
+    answers: ["yes", "null", "true", "NaN"],
+    correct: "true"
   },
 ];
 
+// FUNCTIONS
 
 // timer that begins once the start button is clicked and the first questions is proposed
 var timer = function () {
-  var ticker = setInterval(function() {
-    
-    if (remainingTime > 0) {
-      timerEl.textContent = remainingTime + " seconds remaning";
+  var ticker = setInterval(function () {
+
+    if (remainingTime > 0 && currentQIndex <= quizList.length - 1) {
+      timerEl.textContent = "Time: " + remainingTime;
       remainingTime--
       console.log(remainingTime);
     } else {
-      timerEl.textContent = ""; 
+      timerEl.textContent = "";
       clearInterval(ticker);
       scoreCard();
     }
@@ -66,7 +94,7 @@ var timer = function () {
 function startGame() {
   // hide elements 
   startScreenEl.setAttribute("class", "hide");
-  scoreEl.setAttribute("class","hide");
+  scoreEl.setAttribute("class", "hide");
   //show element
   questionAnswerEl.removeAttribute("class");
   timer();
@@ -74,23 +102,23 @@ function startGame() {
 }
 
 function displayQuestion() {
-  var currentQuestion = quizList[currentQIndex]; 
-  var questionText = document.getElementById("questionText"); 
+  var currentQuestion = quizList[currentQIndex];
+  var questionText = document.getElementById("questionText");
   questionText.textContent = currentQuestion.question
   answer1Btn.textContent = currentQuestion.answers[0];
   answer2Btn.textContent = currentQuestion.answers[1];
   answer3Btn.textContent = currentQuestion.answers[2];
   answer4Btn.textContent = currentQuestion.answers[3];
 };
-  
+
 function scoreCard() {
   questionAnswerEl.setAttribute("class", "hide");
   scoreEl.removeAttribute("class");
-  scoreEl.textContent= "You finished the quiz with a score of " + score;
+  scoreEl.textContent = "You finished the quiz with a score of " + score;
 };
 
 function advanceQuestion() {
-  currentQIndex++; 
+  currentQIndex++;
   if (currentQIndex <= quizList.length - 1) {
     displayQuestion()
   } else {
@@ -98,11 +126,10 @@ function advanceQuestion() {
   }
 };
 
-
 function assessAnswer(event) {
-  console.log(event);
+  // target.innerText compares what the user chooses upon click to the correlating correct object within the array
   if (event.target.innerText === quizList[currentQIndex].correct) {
-    feedback.textContent = "Correct!"; 
+    feedback.textContent = "Correct!";
     score = (score + 10);
     console.log("current score is " + score);
   } else {
@@ -112,13 +139,8 @@ function assessAnswer(event) {
   advanceQuestion();
 };
 
-// funtionality to determine whether the user's reponse is correct or incorrect
-// reward player with points for a correct answer
-// subtract time from the timer if the player answers incorrectly
 
-
-
-
+// EVENT LISTENER BUTTONS
 startButton.addEventListener("click", startGame);
 answer1Btn.addEventListener("click", assessAnswer);
 answer2Btn.addEventListener("click", assessAnswer);
