@@ -145,7 +145,7 @@ function assessAnswer(event) {
   advanceQuestion();
 };
 
-var saveScore = function(event) {
+var saveScore = function (event) {
   hsInitials.push(score);
   hsInitials.push(initials.value);
   localStorage.setItem("score-initials", JSON.stringify(hsInitials));
@@ -153,13 +153,12 @@ var saveScore = function(event) {
   highScoreEl.setAttribute("class", "hide");
   scoreEl.setAttribute("class", "hide");
   event.preventDefault();
-  
+
 };
 
-var loadScore = function() {
-  var savedScore = localStorage.getItem("score-initials"); 
+var loadScore = function () {
+  var savedScore = localStorage.getItem("score-initials");
   savedScore = JSON.parse(savedScore);
-  console.log(savedScore);
   leaderboard.textContent = "Score, Initials: " + savedScore;
 };
 
