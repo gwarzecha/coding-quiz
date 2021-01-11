@@ -10,12 +10,17 @@ var answer1Btn = document.getElementById("a1");
 var answer2Btn = document.getElementById("a2");
 var answer3Btn = document.getElementById("a3");
 var answer4Btn = document.getElementById("a4");
+var scoreBtn = document.getElementById("submit");
 var remainingTime = 60;
 var timerEl = document.getElementById("countdown");
 var scoreEl = document.getElementById("score");
 var score = 0;
 var currentQIndex = 0;
 var feedback = document.getElementById("right-wrong");
+var highScoreEl = document.getElementById("highscore");
+var initials = document.getElementById("initials");
+
+var hsInitials = [];
 
 // questions and answers for the quiz, stored in an array 
 var quizList = [
@@ -81,7 +86,6 @@ var timer = function () {
     if (remainingTime > 0 && currentQIndex <= quizList.length - 1) {
       timerEl.textContent = "Time: " + remainingTime;
       remainingTime--
-      console.log(remainingTime);
     } else {
       timerEl.textContent = "";
       clearInterval(ticker);
@@ -115,6 +119,9 @@ function scoreCard() {
   questionAnswerEl.setAttribute("class", "hide");
   scoreEl.removeAttribute("class");
   scoreEl.textContent = "You finished the quiz with a score of " + score;
+  highScoreEl.removeAttribute("class");
+
+
 };
 
 function advanceQuestion() {
@@ -131,13 +138,22 @@ function assessAnswer(event) {
   if (event.target.innerText === quizList[currentQIndex].correct) {
     feedback.textContent = "Correct!";
     score = (score + 10);
-    console.log("current score is " + score);
   } else {
     feedback.textContent = "That is incorrect!"
     remainingTime = (remainingTime - 10);
   }
   advanceQuestion();
 };
+
+var saveScore = function() {
+  console.log(score);
+  
+  hsInitials.push(score);
+  hsInitials.push(initials.value);
+  localStorage.setItem("score-initials", JSON.stringify(hsInitials));
+};
+
+
 
 
 // EVENT LISTENER BUTTONS
@@ -146,3 +162,4 @@ answer1Btn.addEventListener("click", assessAnswer);
 answer2Btn.addEventListener("click", assessAnswer);
 answer3Btn.addEventListener("click", assessAnswer);
 answer4Btn.addEventListener("click", assessAnswer);
+scoreBtn.addEventListener("click", saveScore);
