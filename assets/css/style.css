@@ -8,7 +8,7 @@ header {
   margin: 10px;
 }
 
-#high-scores, #countdown {
+#countdown {
   margin: 15px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
@@ -62,6 +62,13 @@ h2 {
   text-align: center;
 }
 
+#scoreboard {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .hide {
   display: none;

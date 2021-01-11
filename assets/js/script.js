@@ -1,7 +1,4 @@
 
-
-// when game is over, score is presented, offer option to save initials and score (localStorage)
-
 // GLOBAL VARIABLES
 var startButton = document.getElementById("begin");
 var startScreenEl = document.getElementById("start-screen");
@@ -11,6 +8,7 @@ var answer2Btn = document.getElementById("a2");
 var answer3Btn = document.getElementById("a3");
 var answer4Btn = document.getElementById("a4");
 var scoreBtn = document.getElementById("submit");
+var playAgainBtn = document.getElementById("play-again");
 var remainingTime = 60;
 var timerEl = document.getElementById("countdown");
 var scoreEl = document.getElementById("score");
@@ -19,6 +17,8 @@ var currentQIndex = 0;
 var feedback = document.getElementById("right-wrong");
 var highScoreEl = document.getElementById("highscore");
 var initials = document.getElementById("initials");
+var scoreboard = document.getElementById("scoreboard");
+var leaderboard = document.getElementById("leaderboard");
 
 var hsInitials = [];
 
@@ -145,14 +145,25 @@ function assessAnswer(event) {
   advanceQuestion();
 };
 
-var saveScore = function() {
-  console.log(score);
-  
+var saveScore = function(event) {
   hsInitials.push(score);
   hsInitials.push(initials.value);
   localStorage.setItem("score-initials", JSON.stringify(hsInitials));
+  scoreboard.removeAttribute("class");
+  highScoreEl.setAttribute("class", "hide");
+  scoreEl.setAttribute("class", "hide");
+  event.preventDefault();
+  
 };
 
+var loadScore = function() {
+  var savedScore = localStorage.getItem("score-initials"); 
+  savedScore = JSON.parse(savedScore);
+  console.log(savedScore);
+  leaderboard.textContent = "Score, Initials: " + savedScore;
+};
+
+loadScore();
 
 
 
@@ -163,3 +174,6 @@ answer2Btn.addEventListener("click", assessAnswer);
 answer3Btn.addEventListener("click", assessAnswer);
 answer4Btn.addEventListener("click", assessAnswer);
 scoreBtn.addEventListener("click", saveScore);
+
+
+
