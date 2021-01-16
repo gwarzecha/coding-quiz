@@ -20,7 +20,6 @@ var initials = document.getElementById("initials");
 var scoreboard = document.getElementById("scoreboard");
 var leaderboard = document.getElementById("leaderboard");
 
-var hsInitials = [];
 
 // questions and answers for the quiz, stored in an array 
 var quizList = [
@@ -146,23 +145,27 @@ function assessAnswer(event) {
 };
 
 var saveScore = function (event) {
-  hsInitials.push(score);
-  hsInitials.push(initials.value);
-  localStorage.setItem("score-initials", JSON.stringify(hsInitials));
+  event.preventDefault();
+  // get saved scores from localstorage, or if not any, set to empty array
+  var previousScore =
+  JSON.parse(localStorage.getItem("score-initials")) || [];
+  // format new score object for current user
+  var newScore = {
+    score: score,
+    initials: initials.value
+  };
+  //hsInitials.push(score);
+  //hsInitials.push(initials.value);
+  previousScore.push(newScore);
+  localStorage.setItem("score-initials", JSON.stringify(previousScore));
   scoreboard.removeAttribute("class");
   highScoreEl.setAttribute("class", "hide");
   scoreEl.setAttribute("class", "hide");
-  event.preventDefault();
-
+  // .location changes the actual address location
+  window.location.href = "highscore.html";
 };
 
-var loadScore = function () {
-  var savedScore = localStorage.getItem("score-initials");
-  savedScore = JSON.parse(savedScore);
-  leaderboard.textContent = "Score, Initials: " + savedScore;
-};
 
-loadScore();
 
 
 
